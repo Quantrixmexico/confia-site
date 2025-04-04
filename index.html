@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONFIA | Consultoría Financiera con Quantrix</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @keyframes fade-in-up {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fade-in-up 1.2s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+  <!-- Menú de navegación fijo -->
+  <header class="fixed top-0 left-0 w-full bg-black bg-opacity-90 z-50 shadow-md">
+    <nav class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-yellow-400 text-xl font-bold">CONFIA</a>
+      <button id="menu-toggle" class="md:hidden text-yellow-400 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <ul id="mobile-menu" class="hidden md:flex md:space-x-6 flex-col md:flex-row absolute md:static top-full left-0 w-full bg-black bg-opacity-90 text-center md:text-left text-sm font-semibold space-y-4 md:space-y-0 py-4 md:py-0 z-40">
+        <li><a href="#que-es-quantrix" class="hover:text-yellow-400 transition">¿Qué es Quantrix?</a></li>
+        <li><a href="#plataforma-quantrix" class="hover:text-yellow-400 transition">Plataforma</a></li>
+        <li><a href="#nosotros" class="hover:text-yellow-400 transition">Nosotros</a></li>
+        <li><a href="#servicios" class="hover:text-yellow-400 transition">Servicios</a></li>
+        <li><a href="#contacto" class="hover:text-yellow-400 transition">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="pt-20"></div>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black via-gray-900 to-black">
+    <img src="images/logo-confia.png" alt="Logo CONFIA" class="w-72 md:w-96 mb-6 animate-fade-in-up">
+    <h1 class="text-4xl md:text-6xl font-bold text-gold-400 mb-4">Consultoría Financiera Estratégica</h1>
+    <p class="text-xl md:text-2xl max-w-2xl text-gray-300 mb-8">
+      Modelos financieros inteligentes, planificación estratégica y capacitación profesional con Quantrix.
+    </p>
+    <a href="#servicios" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition transform hover:scale-105">Descubre Nuestros Servicios</a>
+    <a href="#contacto" class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition transform hover:scale-105">Solicita una demo</a>
+  </section>
+
+  <!-- ¿Qué es Quantrix? -->
+  <section id="que-es-quantrix" class="py-16 px-6 bg-gray-900 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">¿Qué es Quantrix?</h2>
+    <div class="max-w-4xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up">
+      <p class="mb-4 font-semibold text-white">La plataforma de modelado financiero y empresarial líder en el mundo</p>
+      <p class="mb-4">
+        Quantrix ayuda a las empresas a modernizar sus prácticas financieras y operativas, aumentar la eficiencia y transformar sus operaciones al proporcionar una plataforma que mejora el rendimiento, el análisis, la trazabilidad y el intercambio de información y datos comerciales críticos.
+      </p>
+      <p class="mb-4">
+        Quantrix utiliza un motor de cálculo multidimensional de última generación para proporcionar una plataforma de modelos financieros de próxima generación para su negocio. Quantrix es capaz de manejar miles de millones de puntos de datos, utilizando cualquier fuente de datos, lo que permite que su modelo financiero y comercial se aleje de las hojas de cálculo tradicionales.
+      </p>
+      <p class="mb-8">
+        Quantrix ofrece enfoques nuevos e innovadores para desafíos comerciales cada vez más complejos. Una experiencia fluida en línea y fuera de línea garantiza que siempre tenga acceso a sus modelos críticos para la empresa.
+      </p>
+      <div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-10">
+  <h3 class="text-2xl font-semibold text-white mb-4">CONOCE QUANTRIX</h3>
+        <iframe class="rounded-xl w-full h-64 md:h-96" src="https://www.youtube.com/embed/XtyUqNzSbMM" title="Video de Quantrix 2" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-10 border-4 border-yellow-400 rounded-xl p-2">
+  <h3 class="text-2xl font-semibold text-white mb-4">Quantrix en un minuto</h3>
+  <iframe class="rounded-xl w-full h-64 md:h-96" src="https://www.youtube.com/embed/xtViQwG5Ahw" title="Quantrix en un minuto" frameborder="0" allowfullscreen></iframe>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+  <div class="overflow-hidden rounded-lg shadow-md">
+    <img src="images/galeria-1.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
+  </div>
+  <div class="overflow-hidden rounded-lg shadow-md">
+    <img src="images/galeria-2.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
+  </div>
+  <div class="overflow-hidden rounded-lg shadow-md">
+    <img src="images/galeria-3.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
+  </div>
+</div>
+  <div class="overflow-hidden rounded-lg shadow-md">
+</div>
+    </div>
+  </section>
+
+  <!-- Plataforma Quantrix -->
+  <section id="plataforma-quantrix" class="py-16 px-6 bg-black text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">LA PLATAFORMA QUANTRIX</h2>
+    <div class="max-w-5xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up space-y-6 text-left">
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-2">RENDIMIENTO DE CÁLCULO INIGUALABLE</h3>
+        <p>Rendimiento de cálculo premiado. El motor de cálculo de Quantrix simplifica el modelado de negocios profesional con herramientas inteligentes.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-2">PLATAFORMA DE MODELADO DE NEGOCIOS DE PRÓXIMA GENERACIÓN</h3>
+        <p>Un entorno de modelado inteligente único para profesionales que necesitan desarrollar y modelar escenarios financieros y operativos con confianza utilizando control de versiones, seguridad, roles de usuario y permisos integrados.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-2">CONSTRUYE EN LO MEJOR</h3>
+        <p>Nuestras API robustas y poderosas son utilizadas por las organizaciones líderes en el mundo para personalizar nuestra tecnología y adaptarla a sus necesidades.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold text-white mb-2">UTILIZA BIG DATA Y LLEVA TUS MODELOS AL SIGUIENTE NIVEL</h3>
+        <p>Integre con prácticamente cualquier fuente de datos utilizando una potente tecnología incorporada. Maneje miles de millones de puntos de datos vinculados en cientos de modelos.</p>
+      </div>
+    </div>
+      <div class="mt-10">
+      <a href="#contacto" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition inline-block">Solicita una demo</a>
+    </div>
+  </section>
+
+  <!-- Nosotros -->
+  <section id="nosotros" class="py-16 px-6 bg-black text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">Nosotros</h2>
+    <div class="max-w-4xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up">
+      <p class="mb-4 font-semibold text-white">Quantrix llega a México de la mano de CONFIA</p>
+      <p class="mb-4">
+        <strong>CONSULTORÍA EN FINANZAS PARA EMPRESAS DE ALTO NIVEL (CONFIA)</strong> es una empresa mexicana con más de 8 años de experiencia en el manejo de Quantrix y dedicada al desarrollo de soluciones empresariales tales como herramientas de control presupuestal, escenarios operativos, valuación de negocios, análisis y reportes financieros.
+      </p>
+      <p class="mb-4">
+        En CONFIA te ayudamos a crear tus modelos a la medida o bien capacitamos a tu equipo de trabajo para que aprenda a desarrollar sus propios modelos con el apoyo y respaldo de Quantrix, la herramienta líder para modelaje financiero.
+      </p>
+      <p class="mb-4 font-semibold text-white">
+        Sé parte del futuro y lleva a tu empresa al siguiente nivel con Quantrix y CONFIA.
+      </p>
+    </div>
+  </section>
+
+  <!-- Olvídate de Excel -->
+  <section id="comparativa-excel" class="py-16 px-6 bg-gray-800 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-12 animate-fade-in-up">Olvídate de Excel</h2>
+    <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-12 animate-fade-in-up">Lleva tus reportes al siguiente nivel con Quantrix</p>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="alert-triangle" class="text-yellow-400 w-10 h-10 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">¿Cansado de que Excel no responda?</h3>
+        <p class="text-gray-300 text-center">Con Quantrix tienes cálculos en memoria en tiempo real.</p>
+      </div>
+      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="layers" class="text-yellow-400 w-10 h-10 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">¿Demasiadas fórmulas?</h3>
+        <p class="text-gray-300 text-center">Quantrix eficienta tu modelaje hasta en un 90% al usar fórmulas por nombre.</p>
+      </div>
+      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="folder-open" class="text-yellow-400 w-10 h-10 mb-4"></i>
+        <h3 class="text-xl font-semibold mb-2">¿Demasiados archivos por consolidar?</h3>
+        <p class="text-gray-300 text-center">Quantrix Cloud permite trabajo colaborativo en un entorno seguro y controlado.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="py-16 px-6 bg-gray-900">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-yellow-400 mb-12 animate-fade-in-up">Nuestros Servicios</h2>
+    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="bar-chart-3" class="text-yellow-400 w-12 h-12 mb-4"></i>
+        <h3 class="text-2xl font-semibold mb-2 animate-fade-in-up">Modelos Financieros</h3>
+        <p class="text-gray-300 text-center">Creamos modelos personalizados para toma de decisiones sólidas y sostenibles.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="activity" class="text-yellow-400 w-12 h-12 mb-4"></i>
+        <h3 class="text-2xl font-semibold mb-2">Simulaciones Multivariable</h3>
+        <p class="text-gray-300 text-center">Explora escenarios complejos para planificar con precisión.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="wallet" class="text-yellow-400 w-12 h-12 mb-4"></i>
+        <h3 class="text-2xl font-semibold mb-2">Presupuestos Corporativos</h3>
+        <p class="text-gray-300 text-center">Desarrollamos estructuras de presupuestos adaptadas a cada línea de negocio.</p>
+      </div>
+      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
+        <i data-lucide="book-open" class="text-yellow-400 w-12 h-12 mb-4"></i>
+        <h3 class="text-2xl font-semibold mb-2">Capacitación en Quantrix</h3>
+        <p class="text-gray-300 text-center">Entrenamos a tu equipo para dominar Quantrix y aplicar mejores prácticas financieras.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-16 px-6 bg-black text-center">
+    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-6 animate-fade-in-up">¿Listo para transformar tu estrategia financiera?</h2>
+    <p class="text-lg text-gray-300 mb-8">Contáctanos para una consulta gratuita y descubre cómo Quantrix puede potenciar tu empresa.</p>
+    <a href="mailto:contacto@confia.com" class="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 rounded-xl font-semibold transition mb-10 inline-block">Contáctanos</a>
+
+    <!-- Formulario de contacto -->
+    <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-xl">
+      <form action="https://formspree.io/f/maneppqd" method="POST" class="space-y-6">
+        <div>
+          <label for="name" class="block text-left text-gray-300 mb-1">Nombre</label>
+          <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700">
+        </div>
+        <div>
+          <label for="email" class="block text-left text-gray-300 mb-1">Correo electrónico</label>
+          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700">
+        </div>
+        <div>
+          <label for="message" class="block text-left text-gray-300 mb-1">Mensaje</label>
+          <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700"></textarea>
+        </div>
+        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-xl font-semibold transition">Enviar</button>
+      <p class='text-green-400 mt-4 hidden' id='form-success'>¡Mensaje enviado con éxito! Te contactaremos pronto.</p>
+</form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-gray-500 text-sm bg-gray-900">
+    &copy; 2025 CONFIA. Todos los derechos reservados.
+  </footer>
+  <script>
+    lucide.createIcons();
+  </script>
+<script>
+  const form = document.querySelector('form');
+  const successMessage = document.getElementById('form-success');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+      successMessage.classList.remove('hidden');
+      setTimeout(() => {
+        successMessage.classList.add('hidden');
+      }, 6000);
+        form.reset();
+      } else {
+        alert('Hubo un error al enviar el formulario. Por favor, revisa los datos e intenta de nuevo.');
+      }
+    });
+  });
+</script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+</script>
+</body>
+</html>
