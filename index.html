@@ -5,244 +5,940 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CONFIA | Consultoría Financiera con Quantrix</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --gold: #F5B800;
+      --gold-dark: #D4A000;
+      --gold-glow: rgba(245, 184, 0, 0.15);
+      --bg-dark: #080808;
+      --bg-card: #111111;
+      --bg-card2: #161616;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #f0f0f0;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* Noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* Grid pattern for hero */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(245,184,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,184,0,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* Animations */
     @keyframes fade-in-up {
-      0% { opacity: 0; transform: translateY(20px); }
+      0% { opacity: 0; transform: translateY(24px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-    .animate-fade-in-up {
-      animation: fade-in-up 1.2s ease-out forwards;
+    @keyframes fade-in {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes pulse-gold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245,184,0,0.3); }
+      50% { box-shadow: 0 0 20px 6px rgba(245,184,0,0.15); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
+    .animate-fade-in { animation: fade-in 1s ease-out forwards; }
+    .delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .delay-2 { animation-delay: 0.25s; opacity: 0; }
+    .delay-3 { animation-delay: 0.4s; opacity: 0; }
+    .delay-4 { animation-delay: 0.55s; opacity: 0; }
+
+    /* Gold text shimmer */
+    .text-shimmer {
+      background: linear-gradient(90deg, var(--gold) 0%, #fff8d6 40%, var(--gold) 60%, #ffda00 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Card styles */
+    .card-base {
+      background: var(--bg-card);
+      border: 1px solid rgba(245,184,0,0.12);
+      border-radius: 16px;
+      transition: all 0.3s ease;
+    }
+    .card-base:hover {
+      border-color: rgba(245,184,0,0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
+    }
+
+    /* AI Card special style */
+    .card-ai {
+      background: linear-gradient(135deg, #0d1a0d 0%, #111111 50%, #1a1500 100%);
+      border: 1px solid rgba(245,184,0,0.25);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
+    .card-ai::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top left, rgba(245,184,0,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .card-ai:hover {
+      border-color: rgba(245,184,0,0.55);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.6), 0 0 30px rgba(245,184,0,0.12);
+      animation: pulse-gold 2s ease-in-out infinite;
+    }
+
+    /* AI badge */
+    .badge-ai {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(90deg, rgba(245,184,0,0.2), rgba(245,184,0,0.1));
+      border: 1px solid rgba(245,184,0,0.4);
+      border-radius: 100px;
+      padding: 4px 14px;
+      font-size: 0.7rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .badge-ai .dot {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: float 1.5s ease-in-out infinite;
+    }
+
+    /* Section divider */
+    .divider-gold {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,184,0,0.4), transparent);
+      margin: 0 auto;
+      max-width: 600px;
+    }
+
+    /* Icon circle */
+    .icon-circle {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(245,184,0,0.1);
+      border: 1px solid rgba(245,184,0,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-circle-lg {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(245,184,0,0.15), rgba(245,184,0,0.05));
+      border: 1px solid rgba(245,184,0,0.35);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* Nav */
+    .nav-link {
+      color: #aaa;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-link:hover { color: var(--gold); }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.2s;
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .nav-link-ai { color: var(--gold) !important; }
+    .nav-link-ai::after { transform: scaleX(0.5); }
+    .nav-link-ai:hover::after { transform: scaleX(1); }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 14px 32px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(245,184,0,0.35);
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 1.5px solid rgba(245,184,0,0.5);
+      color: var(--gold);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 13px 32px;
+      border-radius: 12px;
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+    .btn-outline:hover {
+      background: rgba(245,184,0,0.1);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* Feature list item */
+    .feature-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .feature-item:last-child { border-bottom: none; }
+    .check-icon {
+      width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px;
+      color: var(--gold);
+    }
+
+    /* Section headings */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    /* Horizontal stats bar */
+    .stat-block {
+      text-align: center;
+      padding: 24px 16px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-block:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* AI section background */
+    .ai-section-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(245,184,0,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 40% at 10% 80%, rgba(0,180,80,0.04) 0%, transparent 60%),
+        #050505;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; color: rgba(255,255,255,0.3); font-size: 0.72rem;
+      font-family: 'Syne', sans-serif; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: float 1.5s ease-in-out infinite;
+    }
+
+    /* Form inputs */
+    .form-input {
+      width: 100%;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: #f0f0f0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-input:focus { border-color: rgba(245,184,0,0.5); }
+    .form-label {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    /* YouTube embed */
+    .video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(245,184,0,0.2);
+    }
+    .video-wrap iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .mobile-menu-open { display: flex !important; }
     }
   </style>
 </head>
-<body class="bg-black text-white font-sans">
-  <!-- Menú de navegación fijo -->
-  <header class="fixed top-0 left-0 w-full bg-black bg-opacity-90 z-50 shadow-md">
-    <nav class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="#" class="text-yellow-400 text-xl font-bold">CONFIA</a>
-      <button id="menu-toggle" class="md:hidden text-yellow-400 focus:outline-none">
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <header class="fixed top-0 left-0 w-full z-50" style="background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(245,184,0,0.1);">
+    <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#" class="flex items-center gap-3">
+        <span style="font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; color:var(--gold); letter-spacing:-0.02em;">CONFIA</span>
+        <span style="width:1px; height:20px; background:rgba(245,184,0,0.3);"></span>
+        <span style="font-family:'DM Sans',sans-serif; font-size:0.7rem; font-weight:300; color:#888; letter-spacing:0.06em; text-transform:uppercase;">Quantrix México</span>
+      </a>
+      <button id="menu-toggle" class="md:hidden" style="color:var(--gold);">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      <ul id="mobile-menu" class="hidden md:flex md:space-x-6 flex-col md:flex-row absolute md:static top-full left-0 w-full bg-black bg-opacity-90 text-center md:text-left text-sm font-semibold space-y-4 md:space-y-0 py-4 md:py-0 z-40">
-        <li><a href="#que-es-quantrix" class="hover:text-yellow-400 transition">¿Qué es Quantrix?</a></li>
-        <li><a href="#plataforma-quantrix" class="hover:text-yellow-400 transition">Plataforma</a></li>
-        <li><a href="#nosotros" class="hover:text-yellow-400 transition">Nosotros</a></li>
-        <li><a href="#servicios" class="hover:text-yellow-400 transition">Servicios</a></li>
-        <li><a href="#contacto" class="hover:text-yellow-400 transition">Contacto</a></li>
+      <ul id="mobile-menu" class="hidden md:flex md:items-center gap-8 flex-col md:flex-row absolute md:static top-full left-0 w-full md:w-auto text-center py-6 md:py-0 px-6 md:px-0"
+          style="background: rgba(8,8,8,0.97); backdrop-filter:blur(12px);">
+        <li><a href="#que-es-quantrix" class="nav-link">Quantrix</a></li>
+        <li><a href="#plataforma-quantrix" class="nav-link">Plataforma</a></li>
+        <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+        <li><a href="#ia-dashboards" class="nav-link nav-link-ai">IA & Dashboards</a></li>
+        <li><a href="#contacto" class="btn-primary" style="font-size:0.75rem; padding:10px 20px;">Contacto</a></li>
       </ul>
     </nav>
   </header>
-  <div class="pt-20"></div>
-  <!-- Hero Section -->
-  <section class="min-h-screen flex flex-col items-center justify-center text-center px-6 bg-gradient-to-b from-black via-gray-900 to-black">
-    <img src="images/logo-confia.png" alt="Logo CONFIA" class="w-72 md:w-96 mb-6 animate-fade-in-up">
-    <h1 class="text-4xl md:text-6xl font-bold text-gold-400 mb-4">Consultoría Financiera Estratégica</h1>
-    <p class="text-xl md:text-2xl max-w-2xl text-gray-300 mb-8">
-      Modelos financieros inteligentes, planificación estratégica y capacitación profesional con Quantrix.
-    </p>
-    <a href="#servicios" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition transform hover:scale-105">Descubre Nuestros Servicios</a>
-    <a href="#contacto" class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition transform hover:scale-105">Solicita una demo</a>
+
+  <!-- ── HERO ───────────────────────────────────────── -->
+  <section class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 grid-bg" style="padding-top:80px;">
+    <!-- Background glow -->
+    <div style="position:absolute; top:30%; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(ellipse, rgba(245,184,0,0.08) 0%, transparent 70%); pointer-events:none;"></div>
+
+    <div class="relative z-10 flex flex-col items-center">
+      <img src="images/logo-confia.png" alt="Logo CONFIA" class="w-64 md:w-80 mb-8 animate-fade-in-up" style="filter: drop-shadow(0 0 32px rgba(245,184,0,0.2));">
+      <span class="section-label animate-fade-in-up delay-1">Consultoría Financiera Estratégica</span>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in-up delay-2 leading-tight" style="max-width:900px;">
+        Modelos financieros de<br><span class="text-shimmer">próxima generación</span>
+      </h1>
+      <p class="text-lg md:text-xl max-w-2xl mb-10 animate-fade-in-up delay-3" style="color:var(--text-muted); font-weight:300; line-height:1.7;">
+        Planificación estratégica, Inteligencia Artificial aplicada y capacitación profesional con Quantrix — la plataforma líder en modelado financiero.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center animate-fade-in-up delay-4">
+        <a href="#servicios" class="btn-primary">Nuestros Servicios</a>
+        <a href="#contacto" class="btn-outline">Solicita una Demo</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint hidden md:flex">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
   </section>
 
-  <!-- ¿Qué es Quantrix? -->
-  <section id="que-es-quantrix" class="py-16 px-6 bg-gray-900 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">¿Qué es Quantrix?</h2>
-    <div class="max-w-4xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up">
-      <p class="mb-4 font-semibold text-white">La plataforma de modelado financiero y empresarial líder en el mundo</p>
-      <p class="mb-4">
-        Quantrix ayuda a las empresas a modernizar sus prácticas financieras y operativas, aumentar la eficiencia y transformar sus operaciones al proporcionar una plataforma que mejora el rendimiento, el análisis, la trazabilidad y el intercambio de información y datos comerciales críticos.
-      </p>
-      <p class="mb-4">
-        Quantrix utiliza un motor de cálculo multidimensional de última generación para proporcionar una plataforma de modelos financieros de próxima generación para su negocio. Quantrix es capaz de manejar miles de millones de puntos de datos, utilizando cualquier fuente de datos, lo que permite que su modelo financiero y comercial se aleje de las hojas de cálculo tradicionales.
-      </p>
-      <p class="mb-8">
-        Quantrix ofrece enfoques nuevos e innovadores para desafíos comerciales cada vez más complejos. Una experiencia fluida en línea y fuera de línea garantiza que siempre tenga acceso a sus modelos críticos para la empresa.
-      </p>
-      <div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-10">
-  <h3 class="text-2xl font-semibold text-white mb-4">CONOCE QUANTRIX</h3>
-        <iframe class="rounded-xl w-full h-64 md:h-96" src="https://www.youtube.com/embed/XtyUqNzSbMM" title="Video de Quantrix 2" frameborder="0" allowfullscreen></iframe>
-</div>
-<div class="aspect-w-16 aspect-h-9 max-w-3xl mx-auto mb-10 border-4 border-yellow-400 rounded-xl p-2">
-  <h3 class="text-2xl font-semibold text-white mb-4">Quantrix en un minuto</h3>
-  <iframe class="rounded-xl w-full h-64 md:h-96" src="https://www.youtube.com/embed/xtViQwG5Ahw" title="Quantrix en un minuto" frameborder="0" allowfullscreen></iframe>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-  <div class="overflow-hidden rounded-lg shadow-md">
-    <img src="images/galeria-1.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
+  <!-- ── STATS BAR ───────────────────────────────────── -->
+  <div style="background:var(--bg-card); border-top:1px solid rgba(245,184,0,0.1); border-bottom:1px solid rgba(245,184,0,0.1);">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4">
+      <div class="stat-block">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Años de experiencia con Quantrix</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">90%</div>
+        <div class="stat-label">Reducción de fórmulas</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Puntos de datos procesables</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">AI</div>
+        <div class="stat-label">Análisis e insights automatizados</div>
+      </div>
+    </div>
   </div>
-  <div class="overflow-hidden rounded-lg shadow-md">
-    <img src="images/galeria-2.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
-  </div>
-  <div class="overflow-hidden rounded-lg shadow-md">
-    <img src="images/galeria-3.png" class="w-full h-full object-cover transition-transform transform hover:scale-105">
-  </div>
-</div>
-  <div class="overflow-hidden rounded-lg shadow-md">
-</div>
-    </div>
-  </section>
 
-  <!-- Plataforma Quantrix -->
-  <section id="plataforma-quantrix" class="py-16 px-6 bg-black text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">LA PLATAFORMA QUANTRIX</h2>
-    <div class="max-w-5xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up space-y-6 text-left">
-      <div>
-        <h3 class="text-2xl font-semibold text-white mb-2">RENDIMIENTO DE CÁLCULO INIGUALABLE</h3>
-        <p>Rendimiento de cálculo premiado. El motor de cálculo de Quantrix simplifica el modelado de negocios profesional con herramientas inteligentes.</p>
+  <!-- ── ¿QUÉ ES QUANTRIX? ──────────────────────────── -->
+  <section id="que-es-quantrix" class="py-24 px-6" style="background:#0a0a0a;">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="section-label">La plataforma</span>
+        <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color:#fff;">¿Qué es <span style="color:var(--gold);">Quantrix?</span></h2>
+        <p class="text-lg max-w-3xl mx-auto" style="color:var(--text-muted); line-height:1.8;">
+          La plataforma de modelado financiero y empresarial líder en el mundo. Moderniza tus prácticas, aumenta la eficiencia y transforma tus operaciones con un motor de cálculo multidimensional de última generación.
+        </p>
       </div>
-      <div>
-        <h3 class="text-2xl font-semibold text-white mb-2">PLATAFORMA DE MODELADO DE NEGOCIOS DE PRÓXIMA GENERACIÓN</h3>
-        <p>Un entorno de modelado inteligente único para profesionales que necesitan desarrollar y modelar escenarios financieros y operativos con confianza utilizando control de versiones, seguridad, roles de usuario y permisos integrados.</p>
-      </div>
-      <div>
-        <h3 class="text-2xl font-semibold text-white mb-2">CONSTRUYE EN LO MEJOR</h3>
-        <p>Nuestras API robustas y poderosas son utilizadas por las organizaciones líderes en el mundo para personalizar nuestra tecnología y adaptarla a sus necesidades.</p>
-      </div>
-      <div>
-        <h3 class="text-2xl font-semibold text-white mb-2">UTILIZA BIG DATA Y LLEVA TUS MODELOS AL SIGUIENTE NIVEL</h3>
-        <p>Integre con prácticamente cualquier fuente de datos utilizando una potente tecnología incorporada. Maneje miles de millones de puntos de datos vinculados en cientos de modelos.</p>
-      </div>
-    </div>
-      <div class="mt-10">
-      <a href="#contacto" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-xl font-semibold transition inline-block">Solicita una demo</a>
-    </div>
-  </section>
 
-  <!-- Nosotros -->
-  <section id="nosotros" class="py-16 px-6 bg-black text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-8 animate-fade-in-up">Nosotros</h2>
-    <div class="max-w-4xl mx-auto text-lg text-gray-300 leading-relaxed animate-fade-in-up">
-      <p class="mb-4 font-semibold text-white">Quantrix llega a México de la mano de CONFIA</p>
-      <p class="mb-4">
-        <strong>CONSULTORÍA EN FINANZAS PARA EMPRESAS DE ALTO NIVEL (CONFIA)</strong> es una empresa mexicana con más de 8 años de experiencia en el manejo de Quantrix y dedicada al desarrollo de soluciones empresariales tales como herramientas de control presupuestal, escenarios operativos, valuación de negocios, análisis y reportes financieros.
-      </p>
-      <p class="mb-4">
-        En CONFIA te ayudamos a crear tus modelos a la medida o bien capacitamos a tu equipo de trabajo para que aprenda a desarrollar sus propios modelos con el apoyo y respaldo de Quantrix, la herramienta líder para modelaje financiero.
-      </p>
-      <p class="mb-4 font-semibold text-white">
-        Sé parte del futuro y lleva a tu empresa al siguiente nivel con Quantrix y CONFIA.
-      </p>
-    </div>
-  </section>
+      <div class="grid md:grid-cols-3 gap-6 mb-16">
+        <div class="card-base p-6">
+          <div class="icon-circle mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">Motor Multidimensional</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Cálculos en memoria en tiempo real. Capaz de manejar miles de millones de puntos de datos vinculados en cientos de modelos.</p>
+        </div>
+        <div class="card-base p-6">
+          <div class="icon-circle mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">Seguridad & Control</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Control de versiones, roles de usuario y permisos integrados. Acceso online y offline garantizado para modelos críticos.</p>
+        </div>
+        <div class="card-base p-6">
+          <div class="icon-circle mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2"/><path d="M15 8V2"/><path d="M18 8H6a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2z"/></svg>
+          </div>
+          <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif;">Integración Total</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">API robustas para conectar con cualquier fuente de datos: SAP, ERP, bases de datos y más.</p>
+        </div>
+      </div>
 
-  <!-- Olvídate de Excel -->
-  <section id="comparativa-excel" class="py-16 px-6 bg-gray-800 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-12 animate-fade-in-up">Olvídate de Excel</h2>
-    <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-12 animate-fade-in-up">Lleva tus reportes al siguiente nivel con Quantrix</p>
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="alert-triangle" class="text-yellow-400 w-10 h-10 mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">¿Cansado de que Excel no responda?</h3>
-        <p class="text-gray-300 text-center">Con Quantrix tienes cálculos en memoria en tiempo real.</p>
-      </div>
-      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="layers" class="text-yellow-400 w-10 h-10 mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">¿Demasiadas fórmulas?</h3>
-        <p class="text-gray-300 text-center">Quantrix eficienta tu modelaje hasta en un 90% al usar fórmulas por nombre.</p>
-      </div>
-      <div class="bg-gray-900 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="folder-open" class="text-yellow-400 w-10 h-10 mb-4"></i>
-        <h3 class="text-xl font-semibold mb-2">¿Demasiados archivos por consolidar?</h3>
-        <p class="text-gray-300 text-center">Quantrix Cloud permite trabajo colaborativo en un entorno seguro y controlado.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Servicios -->
-  <section id="servicios" class="py-16 px-6 bg-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-yellow-400 mb-12 animate-fade-in-up">Nuestros Servicios</h2>
-    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="bar-chart-3" class="text-yellow-400 w-12 h-12 mb-4"></i>
-        <h3 class="text-2xl font-semibold mb-2 animate-fade-in-up">Modelos Financieros</h3>
-        <p class="text-gray-300 text-center">Creamos modelos personalizados para toma de decisiones sólidas y sostenibles.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="activity" class="text-yellow-400 w-12 h-12 mb-4"></i>
-        <h3 class="text-2xl font-semibold mb-2">Simulaciones Multivariable</h3>
-        <p class="text-gray-300 text-center">Explora escenarios complejos para planificar con precisión.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="wallet" class="text-yellow-400 w-12 h-12 mb-4"></i>
-        <h3 class="text-2xl font-semibold mb-2">Presupuestos Corporativos</h3>
-        <p class="text-gray-300 text-center">Desarrollamos estructuras de presupuestos adaptadas a cada línea de negocio.</p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-lg flex flex-col items-center">
-        <i data-lucide="book-open" class="text-yellow-400 w-12 h-12 mb-4"></i>
-        <h3 class="text-2xl font-semibold mb-2">Capacitación en Quantrix</h3>
-        <p class="text-gray-300 text-center">Entrenamos a tu equipo para dominar Quantrix y aplicar mejores prácticas financieras.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contacto -->
-  <section id="contacto" class="py-16 px-6 bg-black text-center">
-    <h2 class="text-3xl md:text-4xl font-bold text-yellow-400 mb-6 animate-fade-in-up">¿Listo para transformar tu estrategia financiera?</h2>
-    <p class="text-lg text-gray-300 mb-8">Contáctanos para una consulta gratuita y descubre cómo Quantrix puede potenciar tu empresa.</p>
-    <a href="mailto:quantrixmexico@gmail.com" class="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 rounded-xl font-semibold transition mb-10 inline-block">Contáctanos</a>
-
-    <!-- Formulario de contacto -->
-    <div class="max-w-xl mx-auto bg-gray-800 p-8 rounded-xl">
-      <form action="https://formspree.io/f/maneppqd" method="POST" class="space-y-6">
+      <!-- Videos -->
+      <div class="grid md:grid-cols-2 gap-8">
         <div>
-          <label for="name" class="block text-left text-gray-300 mb-1">Nombre</label>
-          <input type="text" id="name" name="name" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700">
+          <h3 class="text-xl font-bold mb-4" style="font-family:'Syne',sans-serif; color:var(--gold);">Conoce Quantrix</h3>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/XtyUqNzSbMM" title="Quantrix" allowfullscreen></iframe>
+          </div>
         </div>
         <div>
-          <label for="email" class="block text-left text-gray-300 mb-1">Correo electrónico</label>
-          <input type="email" id="email" name="email" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700">
+          <h3 class="text-xl font-bold mb-4" style="font-family:'Syne',sans-serif; color:var(--gold);">Quantrix en un minuto</h3>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/xtViQwG5Ahw" title="Quantrix en un minuto" allowfullscreen></iframe>
+          </div>
         </div>
-        <div>
-          <label for="message" class="block text-left text-gray-300 mb-1">Mensaje</label>
-          <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 rounded bg-gray-900 text-white border border-gray-700"></textarea>
+      </div>
+
+      <!-- Gallery -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+        <div class="overflow-hidden rounded-xl" style="border:1px solid rgba(245,184,0,0.15);">
+          <img src="images/galeria-1.png" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
         </div>
-        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-2 rounded-xl font-semibold transition">Enviar</button>
-      <p class='text-green-400 mt-4 hidden' id='form-success'>¡Mensaje enviado con éxito! Te contactaremos pronto.</p>
-</form>
+        <div class="overflow-hidden rounded-xl" style="border:1px solid rgba(245,184,0,0.15);">
+          <img src="images/galeria-2.png" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        </div>
+        <div class="overflow-hidden rounded-xl" style="border:1px solid rgba(245,184,0,0.15);">
+          <img src="images/galeria-3.png" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="py-6 text-center text-gray-500 text-sm bg-gray-900">
-    &copy; 2025 CONFIA. Todos los derechos reservados.
+  <div class="divider-gold"></div>
+
+  <!-- ── PLATAFORMA ─────────────────────────────────── -->
+  <section id="plataforma-quantrix" class="py-24 px-6" style="background:#080808;">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="section-label">Capacidades</span>
+        <h2 class="text-3xl md:text-5xl font-bold" style="color:#fff;">La Plataforma <span style="color:var(--gold);">Quantrix</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card-base p-8 flex gap-5">
+          <div class="icon-circle" style="margin-top:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="15" x2="4" y2="15"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="15" x2="22" y2="15"/></svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Rendimiento de Cálculo Inigualable</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Motor de cálculo premiado que simplifica el modelado de negocios profesional con herramientas inteligentes y resultados en tiempo real.</p>
+          </div>
+        </div>
+        <div class="card-base p-8 flex gap-5">
+          <div class="icon-circle" style="margin-top:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Modelado de Próxima Generación</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Entorno inteligente único para desarrollar y modelar escenarios financieros y operativos con confianza, control de versiones y permisos integrados.</p>
+          </div>
+        </div>
+        <div class="card-base p-8 flex gap-5">
+          <div class="icon-circle" style="margin-top:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Construye en lo Mejor</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">API robustas utilizadas por organizaciones líderes en el mundo para personalizar la tecnología y adaptarla a sus necesidades específicas.</p>
+          </div>
+        </div>
+        <div class="card-base p-8 flex gap-5">
+          <div class="icon-circle" style="margin-top:4px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Big Data sin Límites</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Integración con prácticamente cualquier fuente de datos. Maneja miles de millones de puntos vinculados en cientos de modelos simultáneamente.</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center mt-12">
+        <a href="#contacto" class="btn-primary">Solicita una Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NOSOTROS ───────────────────────────────────── -->
+  <section id="nosotros" class="py-24 px-6" style="background:var(--bg-card);">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="section-label">Quiénes somos</span>
+          <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color:#fff;">Quantrix llega a México<br>de la mano de <span style="color:var(--gold);">CONFIA</span></h2>
+          <p class="mb-4" style="color:var(--text-muted); line-height:1.8;">
+            <strong style="color:#fff;">CONSULTORÍA EN FINANZAS PARA EMPRESAS DE ALTO NIVEL (CONFIA)</strong> es una empresa mexicana con más de 8 años de experiencia en el manejo de Quantrix, dedicada al desarrollo de soluciones empresariales como herramientas de control presupuestal, escenarios operativos, valuación de negocios y reportes financieros.
+          </p>
+          <p style="color:var(--text-muted); line-height:1.8;">
+            En CONFIA te ayudamos a crear tus modelos a la medida o capacitamos a tu equipo para que aprenda a desarrollar sus propios modelos — con el respaldo de Quantrix y el poder de la Inteligencia Artificial.
+          </p>
+          <p class="mt-6 font-bold" style="color:var(--gold); font-family:'Syne',sans-serif;">
+            Sé parte del futuro. Lleva tu empresa al siguiente nivel.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 gap-4">
+          <div class="card-base p-5 flex items-center gap-4">
+            <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+            <div>
+              <div class="font-bold text-sm" style="font-family:'Syne',sans-serif; color:#fff;">Partner oficial Quantrix en México</div>
+              <div style="color:var(--text-muted); font-size:0.82rem;">Representación exclusiva con soporte directo</div>
+            </div>
+          </div>
+          <div class="card-base p-5 flex items-center gap-4">
+            <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <div class="font-bold text-sm" style="font-family:'Syne',sans-serif; color:#fff;">Capacitación a equipos completos</div>
+              <div style="color:var(--text-muted); font-size:0.82rem;">Formación en modelado financiero avanzado</div>
+            </div>
+          </div>
+          <div class="card-base p-5 flex items-center gap-4">
+            <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <div>
+              <div class="font-bold text-sm" style="font-family:'Syne',sans-serif; color:#fff;">Soluciones a la medida</div>
+              <div style="color:var(--text-muted); font-size:0.82rem;">Modelos personalizados para cada industria</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OLVÍDATE DE EXCEL ──────────────────────────── -->
+  <section class="py-20 px-6" style="background:#060606;">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="section-label">Evolución</span>
+        <h2 class="text-3xl md:text-5xl font-bold" style="color:#fff;">Olvídate de <span style="color:var(--gold);">Excel</span></h2>
+        <p class="mt-4 text-lg" style="color:var(--text-muted);">Lleva tus reportes al siguiente nivel con Quantrix</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card-base p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <h3 class="text-lg font-bold mb-3" style="font-family:'Syne',sans-serif;">¿Excel no responde?</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Con Quantrix tienes cálculos en memoria en tiempo real, sin congelamientos ni esperas.</p>
+        </div>
+        <div class="card-base p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <h3 class="text-lg font-bold mb-3" style="font-family:'Syne',sans-serif;">¿Demasiadas fórmulas?</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Quantrix eficienta tu modelaje hasta en un 90% usando fórmulas por nombre, no por celda.</p>
+        </div>
+        <div class="card-base p-8 text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.55 6a2 2 0 0 1-1.94 1.5H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2"/></svg>
+          <h3 class="text-lg font-bold mb-3" style="font-family:'Syne',sans-serif;">¿Muchos archivos?</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.7;">Quantrix Cloud permite trabajo colaborativo en tiempo real en un entorno seguro y controlado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICIOS ──────────────────────────────────── -->
+  <section id="servicios" class="py-24 px-6" style="background:var(--bg-card2);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="section-label">Lo que hacemos</span>
+        <h2 class="text-3xl md:text-5xl font-bold" style="color:#fff;">Nuestros <span style="color:var(--gold);">Servicios</span></h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="card-base p-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Modelos Financieros</h3>
+          <p style="color:var(--text-muted); line-height:1.8;">Creamos modelos personalizados para toma de decisiones sólidas y sostenibles, adaptados a la estructura y objetivos de tu empresa.</p>
+        </div>
+        <div class="card-base p-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Simulaciones Multivariable</h3>
+          <p style="color:var(--text-muted); line-height:1.8;">Explora escenarios complejos con múltiples variables para planificar con precisión y anticipar riesgos antes de que ocurran.</p>
+        </div>
+        <div class="card-base p-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+          <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Presupuestos Corporativos</h3>
+          <p style="color:var(--text-muted); line-height:1.8;">Desarrollamos estructuras de presupuestos adaptadas a cada línea de negocio, con trazabilidad completa y colaboración en tiempo real.</p>
+        </div>
+        <div class="card-base p-8">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <h3 class="text-xl font-bold mb-3" style="font-family:'Syne',sans-serif;">Capacitación en Quantrix</h3>
+          <p style="color:var(--text-muted); line-height:1.8;">Entrenamos a tu equipo para dominar Quantrix y aplicar las mejores prácticas de modelado financiero de forma autónoma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── IA & DASHBOARDS ── NUEVA SECCIÓN ───────────── -->
+  <section id="ia-dashboards" class="py-28 px-6 ai-section-bg" style="position:relative; overflow:hidden;">
+
+    <!-- Decorative glow elements -->
+    <div style="position:absolute; top:-100px; right:-100px; width:500px; height:500px; background:radial-gradient(ellipse, rgba(245,184,0,0.06) 0%, transparent 70%); pointer-events:none;"></div>
+    <div style="position:absolute; bottom:-100px; left:-100px; width:400px; height:400px; background:radial-gradient(ellipse, rgba(0,200,100,0.04) 0%, transparent 70%); pointer-events:none;"></div>
+
+    <div class="max-w-6xl mx-auto relative z-10">
+
+      <!-- Section header -->
+      <div class="text-center mb-20">
+        <div class="badge-ai justify-center mb-6" style="display:inline-flex;">
+          <div class="dot"></div>
+          Nuevo · Inteligencia Artificial
+        </div>
+        <h2 class="text-3xl md:text-6xl font-bold leading-tight mb-6" style="color:#fff;">
+          CONFIA + <span class="text-shimmer">IA</span>
+        </h2>
+        <p class="text-xl max-w-3xl mx-auto" style="color:var(--text-muted); line-height:1.8;">
+          Potencia tus decisiones financieras con Inteligencia Artificial. Detecta patrones, anomalías y oportunidades que los métodos tradicionales no pueden ver.
+        </p>
+      </div>
+
+      <!-- AI Service Cards -->
+      <div class="grid md:grid-cols-2 gap-8 mb-20">
+
+        <!-- Card 1: Revisión Inteligente -->
+        <div class="card-ai p-10">
+          <div class="badge-ai mb-6">
+            <div class="dot"></div>
+            Servicio IA
+          </div>
+          <div class="icon-circle-lg mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 11 2 2 4-4"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4" style="font-family:'Syne',sans-serif; color:#fff;">Revisión Inteligente<br>de Información</h3>
+          <p class="mb-8" style="color:var(--text-muted); line-height:1.8;">
+            Analizamos tus reportes financieros y bases de datos con IA para detectar automáticamente errores, inconsistencias y anomalías que pasarían desapercibidos en una revisión manual.
+          </p>
+          <div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Detección de anomalías y errores</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Identifica valores atípicos, duplicados y registros inconsistentes en tu información financiera.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Análisis de grandes volúmenes</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Procesa miles de registros de SAP, ERP o Excel en segundos con precisión superior al humano.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Reportes y recomendaciones accionables</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Genera alertas y resúmenes ejecutivos con hallazgos claros y pasos correctivos sugeridos.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Integración con Quantrix</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Los hallazgos se alimentan directamente a tus modelos para proyecciones más precisas.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8">
+            <a href="#contacto" class="btn-primary">Solicitar información</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Dashboards con IA -->
+        <div class="card-ai p-10">
+          <div class="badge-ai mb-6">
+            <div class="dot"></div>
+            Servicio IA
+          </div>
+          <div class="icon-circle-lg mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          </div>
+          <h3 class="text-2xl md:text-3xl font-bold mb-4" style="font-family:'Syne',sans-serif; color:#fff;">Dashboards Ejecutivos<br>con IA</h3>
+          <p class="mb-8" style="color:var(--text-muted); line-height:1.8;">
+            Creamos dashboards de nivel C-Suite potenciados por IA que no solo muestran datos — los interpretan, narran y proyectan, para que tomes decisiones con contexto completo.
+          </p>
+          <div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">KPIs financieros en tiempo real</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Visualizaciones interactivas de márgenes, flujos, cartera y presupuesto actualizadas automáticamente.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Narrativas automáticas generadas por IA</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">La IA redacta el resumen ejecutivo: variaciones, causas probables y recomendaciones en texto.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Integración con SAP, ERP y Quantrix</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">Conectamos tus fuentes existentes sin necesidad de migrar ni cambiar procesos actuales.</div>
+              </div>
+            </div>
+            <div class="feature-item">
+              <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              <div>
+                <div class="font-bold text-sm mb-1" style="font-family:'Syne',sans-serif; color:#fff;">Alertas predictivas</div>
+                <div style="color:var(--text-muted); font-size:0.85rem;">La IA detecta tendencias negativas antes de que impacten tus resultados y te avisa con tiempo.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-8">
+            <a href="#contacto" class="btn-primary">Solicitar información</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- How it works strip -->
+      <div style="background:rgba(245,184,0,0.04); border:1px solid rgba(245,184,0,0.15); border-radius:20px; padding:40px;">
+        <div class="text-center mb-10">
+          <span class="section-label">Proceso</span>
+          <h3 class="text-2xl font-bold" style="color:#fff;">¿Cómo funciona?</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <div style="width:48px; height:48px; border-radius:50%; background:rgba(245,184,0,0.15); border:1px solid rgba(245,184,0,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-family:'Syne',sans-serif; font-weight:800; color:var(--gold);">1</div>
+            <div class="font-bold text-sm mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Diagnóstico</div>
+            <div style="color:var(--text-muted); font-size:0.82rem;">Analizamos tus fuentes de datos y procesos actuales</div>
+          </div>
+          <div>
+            <div style="width:48px; height:48px; border-radius:50%; background:rgba(245,184,0,0.15); border:1px solid rgba(245,184,0,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-family:'Syne',sans-serif; font-weight:800; color:var(--gold);">2</div>
+            <div class="font-bold text-sm mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Diseño</div>
+            <div style="color:var(--text-muted); font-size:0.82rem;">Definimos la arquitectura del modelo o dashboard con IA</div>
+          </div>
+          <div>
+            <div style="width:48px; height:48px; border-radius:50%; background:rgba(245,184,0,0.15); border:1px solid rgba(245,184,0,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-family:'Syne',sans-serif; font-weight:800; color:var(--gold);">3</div>
+            <div class="font-bold text-sm mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Implementación</div>
+            <div style="color:var(--text-muted); font-size:0.82rem;">Construimos e integramos la solución en tu entorno</div>
+          </div>
+          <div>
+            <div style="width:48px; height:48px; border-radius:50%; background:rgba(245,184,0,0.15); border:1px solid rgba(245,184,0,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 12px; font-family:'Syne',sans-serif; font-weight:800; color:var(--gold);">4</div>
+            <div class="font-bold text-sm mb-2" style="font-family:'Syne',sans-serif; color:#fff;">Soporte</div>
+            <div style="color:var(--text-muted); font-size:0.82rem;">Acompañamiento continuo y mejoras iterativas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACTO ───────────────────────────────────── -->
+  <section id="contacto" class="py-24 px-6" style="background:#050505;">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-16 items-start">
+        <div>
+          <span class="section-label">Hablemos</span>
+          <h2 class="text-3xl md:text-5xl font-bold mb-6" style="color:#fff;">¿Listo para <span style="color:var(--gold);">transformar</span><br>tu empresa?</h2>
+          <p class="mb-8" style="color:var(--text-muted); line-height:1.8;">
+            Contáctanos para una consulta gratuita y descubre cómo Quantrix y la Inteligencia Artificial pueden potenciar tu estrategia financiera.
+          </p>
+          <div class="space-y-4">
+            <a href="mailto:quantrixmexico@gmail.com" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
+              <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted); font-family:'Syne',sans-serif; text-transform:uppercase; letter-spacing:0.06em;">Email</div>
+                <div style="color:#fff; font-weight:500;">quantrixmexico@gmail.com</div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card-base p-8">
+          <h3 class="text-xl font-bold mb-6" style="font-family:'Syne',sans-serif; color:#fff;">Envíanos un mensaje</h3>
+          <form action="https://formspree.io/f/maneppqd" method="POST" class="space-y-5" id="contact-form">
+            <div>
+              <label for="name" class="form-label">Nombre</label>
+              <input type="text" id="name" name="name" required placeholder="Tu nombre completo" class="form-input">
+            </div>
+            <div>
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" id="email" name="email" required placeholder="correo@empresa.com" class="form-input">
+            </div>
+            <div>
+              <label for="service" class="form-label">Servicio de interés</label>
+              <select id="service" name="service" class="form-input" style="cursor:pointer;">
+                <option value="" style="background:#111;">Selecciona una opción</option>
+                <option value="modelos" style="background:#111;">Modelos Financieros</option>
+                <option value="simulaciones" style="background:#111;">Simulaciones Multivariable</option>
+                <option value="presupuestos" style="background:#111;">Presupuestos Corporativos</option>
+                <option value="capacitacion" style="background:#111;">Capacitación en Quantrix</option>
+                <option value="revision-ia" style="background:#111;">✦ Revisión Inteligente con IA</option>
+                <option value="dashboard-ia" style="background:#111;">✦ Dashboards Ejecutivos con IA</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="form-label">Mensaje</label>
+              <textarea id="message" name="message" rows="4" required placeholder="Cuéntanos brevemente tu situación actual y qué necesitas..." class="form-input" style="resize:vertical;"></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full text-center" style="width:100%;">Enviar mensaje</button>
+            <p class="text-green-400 text-center hidden" id="form-success" style="font-family:'Syne',sans-serif; font-size:0.9rem;">
+              ✓ ¡Mensaje enviado! Te contactaremos pronto.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────── -->
+  <footer class="py-10 px-6" style="background:#000; border-top:1px solid rgba(245,184,0,0.1);">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <span style="font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:800; color:var(--gold);">CONFIA</span>
+        <span style="color:#555; font-size:0.8rem;">Consultoría Financiera Estratégica</span>
+      </div>
+      <div class="flex gap-8">
+        <a href="#que-es-quantrix" class="nav-link" style="font-size:0.75rem;">Quantrix</a>
+        <a href="#nosotros" class="nav-link" style="font-size:0.75rem;">Nosotros</a>
+        <a href="#servicios" class="nav-link" style="font-size:0.75rem;">Servicios</a>
+        <a href="#ia-dashboards" class="nav-link nav-link-ai" style="font-size:0.75rem;">IA & Dashboards</a>
+      </div>
+      <p style="color:#444; font-size:0.78rem;">&copy; 2025 CONFIA. Todos los derechos reservados.</p>
+    </div>
   </footer>
+
+  <!-- ── SCRIPTS ────────────────────────────────────── -->
   <script>
-    lucide.createIcons();
-  </script>
-<script>
-  const form = document.querySelector('form');
-  const successMessage = document.getElementById('form-success');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(form);
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-      successMessage.classList.remove('hidden');
-      setTimeout(() => {
-        successMessage.classList.add('hidden');
-      }, 6000);
-        form.reset();
-      } else {
-        alert('Hubo un error al enviar el formulario. Por favor, revisa los datos e intenta de nuevo.');
-      }
+    document.addEventListener('DOMContentLoaded', function () {
+      // Mobile menu
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      toggle.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+        menu.classList.toggle('flex');
+      });
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          menu.classList.add('hidden');
+          menu.classList.remove('flex');
+        });
+      });
     });
-  });
-</script>
-<script>
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  toggle?.addEventListener('click', () => {
-    menu.classList.toggle('hidden');
-  });
-</script>
+  </script>
+  <script>
+    // Form submission
+    const form = document.getElementById('contact-form');
+    const successMessage = document.getElementById('form-success');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          successMessage.classList.remove('hidden');
+          form.reset();
+          setTimeout(() => successMessage.classList.add('hidden'), 6000);
+        } else {
+          alert('Hubo un error al enviar. Por favor intenta de nuevo.');
+        }
+      });
+    });
+  </script>
+  <script>
+    // Scroll-triggered animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.card-base, .card-ai').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease';
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
