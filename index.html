@@ -806,7 +806,117 @@
     </div>
   </section>
 
+  <!-- ── CALCULADORA DE ROI ─────────────────────────── -->
+  <section id="roi-calc" class="py-24 px-6" style="background:#0b0b0b;">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-14">
+        <span class="section-label">Calcula tu ahorro</span>
+        <h2 class="text-3xl md:text-5xl font-bold mb-4" style="color:#fff;">¿Cuánto te cuesta <span style="color:var(--gold);">seguir con Excel?</span></h2>
+        <p style="color:var(--text-muted); font-size:1rem; line-height:1.8; max-width:600px; margin:0 auto;">Ingresa los datos de tu equipo y descubre cuánto tiempo y dinero puedes recuperar con Quantrix + IA.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <!-- Inputs -->
+        <div class="card-base p-8 space-y-8">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <label class="form-label" style="margin-bottom:0;">Personas en el equipo financiero</label>
+              <span id="val-personas" style="font-family:'Syne',sans-serif; font-weight:700; color:var(--gold); font-size:1.1rem;">5</span>
+            </div>
+            <input type="range" id="sl-personas" min="1" max="30" value="5" style="width:100%; accent-color:var(--gold); cursor:pointer;">
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <label class="form-label" style="margin-bottom:0;">Horas/mes en reportes y consolidación</label>
+              <span id="val-horas" style="font-family:'Syne',sans-serif; font-weight:700; color:var(--gold); font-size:1.1rem;">40 h</span>
+            </div>
+            <input type="range" id="sl-horas" min="5" max="200" value="40" style="width:100%; accent-color:var(--gold); cursor:pointer;">
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <label class="form-label" style="margin-bottom:0;">Costo hora promedio del equipo (MXN)</label>
+              <span id="val-costo" style="font-family:'Syne',sans-serif; font-weight:700; color:var(--gold); font-size:1.1rem;">$250</span>
+            </div>
+            <input type="range" id="sl-costo" min="100" max="2000" step="50" value="250" style="width:100%; accent-color:var(--gold); cursor:pointer;">
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <label class="form-label" style="margin-bottom:0;">Archivos Excel a consolidar por mes</label>
+              <span id="val-archivos" style="font-family:'Syne',sans-serif; font-weight:700; color:var(--gold); font-size:1.1rem;">12</span>
+            </div>
+            <input type="range" id="sl-archivos" min="1" max="100" value="12" style="width:100%; accent-color:var(--gold); cursor:pointer;">
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div class="card-ai p-6 text-center">
+            <div style="font-size:0.72rem; font-family:'Syne',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Horas recuperadas al año</div>
+            <div id="res-horas" style="font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; color:var(--gold); line-height:1;">—</div>
+            <div style="color:var(--text-muted); font-size:0.8rem; margin-top:6px;">con una reducción del 70% en tiempo de reporte</div>
+          </div>
+          <div class="card-ai p-6 text-center">
+            <div style="font-size:0.72rem; font-family:'Syne',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Ahorro anual estimado</div>
+            <div id="res-ahorro" style="font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; color:var(--gold); line-height:1;">—</div>
+            <div style="color:var(--text-muted); font-size:0.8rem; margin-top:6px;">solo en costo de horas hombre recuperadas</div>
+          </div>
+          <div class="card-ai p-6 text-center">
+            <div style="font-size:0.72rem; font-family:'Syne',sans-serif; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Reducción de archivos</div>
+            <div id="res-archivos" style="font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; color:var(--gold); line-height:1;">—</div>
+            <div style="color:var(--text-muted); font-size:0.8rem; margin-top:6px;">al consolidar en un solo modelo Quantrix</div>
+          </div>
+          <a href="#contacto" class="btn-primary text-center">Quiero este ahorro para mi empresa</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHAT IA FLOTANTE ───────────────────────────── -->
+  <div id="chat-widget" style="position:fixed; bottom:24px; right:24px; z-index:1000; display:flex; flex-direction:column; align-items:flex-end; gap:12px;">
+
+    <!-- Chat panel -->
+    <div id="chat-panel" style="display:none; width:360px; height:520px; background:#111; border:1px solid rgba(245,184,0,0.3); border-radius:20px; box-shadow:0 24px 64px rgba(0,0,0,0.7), 0 0 30px rgba(245,184,0,0.08); display:none; flex-direction:column; overflow:hidden;">
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,#1a1400,#111); border-bottom:1px solid rgba(245,184,0,0.2); padding:16px 20px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:rgba(245,184,0,0.15); border:1px solid rgba(245,184,0,0.4); display:flex; align-items:center; justify-content:center;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><circle cx="19" cy="5" r="3" fill="#F5B800" stroke="none"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; color:#fff;">Asistente CONFIA</div>
+            <div style="font-size:0.7rem; color:#4ade80; display:flex; align-items:center; gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block;"></span> En línea</div>
+          </div>
+        </div>
+        <button onclick="toggleChat()" style="background:none; border:none; color:#888; cursor:pointer; font-size:1.2rem; line-height:1;">✕</button>
+      </div>
+      <!-- Messages -->
+      <div id="chat-messages" style="flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; scroll-behavior:smooth;">
+        <div class="msg-ai" style="background:#1a1a1a; border:1px solid rgba(245,184,0,0.1); border-radius:14px 14px 14px 4px; padding:12px 14px; font-size:0.85rem; color:#ddd; line-height:1.6; max-width:90%;">
+          ¡Hola! Soy el asistente de <strong style="color:var(--gold);">CONFIA</strong>. Puedo ayudarte a entender nuestros servicios de Quantrix e IA, o resolver dudas sobre cómo podemos ayudar a tu empresa. ¿Por dónde empezamos?
+        </div>
+      </div>
+      <!-- Input -->
+      <div style="padding:12px 16px; border-top:1px solid rgba(255,255,255,0.07); display:flex; gap:8px;">
+        <input id="chat-input" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter') sendMessage()"
+          style="flex:1; background:#0d0d0d; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:10px 14px; color:#f0f0f0; font-family:'DM Sans',sans-serif; font-size:0.85rem; outline:none;">
+        <button onclick="sendMessage()" style="background:var(--gold); border:none; border-radius:10px; width:40px; height:40px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background 0.2s;" onmouseover="this.style.background='#fff'" onmouseout="this.style.background='var(--gold)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Toggle button -->
+    <button onclick="toggleChat()" id="chat-toggle-btn"
+      style="width:60px; height:60px; border-radius:50%; background:var(--gold); border:none; cursor:pointer; box-shadow:0 8px 24px rgba(245,184,0,0.4); display:flex; align-items:center; justify-content:center; transition:all 0.3s; position:relative;">
+      <svg id="chat-icon-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg id="chat-icon-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <!-- Notification dot -->
+      <span id="chat-notif" style="position:absolute; top:2px; right:2px; width:14px; height:14px; background:#ef4444; border-radius:50%; border:2px solid #080808; font-size:0.6rem; color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700;">1</span>
+    </button>
+  </div>
+
   <!-- ── CONTACTO ───────────────────────────────────── -->
+
   <section id="contacto" class="py-24 px-6" style="background:#050505;">
     <div class="max-w-6xl mx-auto">
       <div class="grid md:grid-cols-2 gap-16 items-start">
@@ -817,11 +927,11 @@
             Contáctanos para una consulta gratuita y descubre cómo Quantrix y la Inteligencia Artificial pueden potenciar tu estrategia financiera.
           </p>
           <div class="space-y-4">
-            <a href="mailto:quantrixmexico@gmail.com" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
+            <a href="/cdn-cgi/l/email-protection#d8a9adb9b6acaab1a0b5bda0b1bbb798bfb5b9b1b4f6bbb7b5" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
               <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
               <div>
                 <div style="font-size:0.75rem; color:var(--text-muted); font-family:'Syne',sans-serif; text-transform:uppercase; letter-spacing:0.06em;">Email</div>
-                <div style="color:#fff; font-weight:500;">quantrixmexico@gmail.com</div>
+                <div style="color:#fff; font-weight:500;"><span class="__cf_email__" data-cfemail="bdccc8dcd3c9cfd4c5d0d8c5d4ded2fddad0dcd4d193ded2d0">[email&#160;protected]</span></div>
               </div>
             </a>
           </div>
@@ -883,7 +993,7 @@
   </footer>
 
   <!-- ── SCRIPTS ────────────────────────────────────── -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.addEventListener('DOMContentLoaded', function () {
       // Mobile menu
       const toggle = document.getElementById('menu-toggle');
@@ -923,9 +1033,35 @@
     });
   </script>
   <script>
-    // Scroll-triggered animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
+    // ── ROI CALCULATOR ─────────────────────────────
+    function fmtNum(n) { return n.toLocaleString('es-MX'); }
+    function updateROI() {
+      var personas = +document.getElementById('sl-personas').value;
+      var horas    = +document.getElementById('sl-horas').value;
+      var costo    = +document.getElementById('sl-costo').value;
+      var archivos = +document.getElementById('sl-archivos').value;
+
+      document.getElementById('val-personas').textContent = personas;
+      document.getElementById('val-horas').textContent    = horas + ' h';
+      document.getElementById('val-costo').textContent    = '$' + fmtNum(costo);
+      document.getElementById('val-archivos').textContent = archivos;
+
+      var horasAhorradas = Math.round(personas * horas * 0.70 * 12);
+      var ahorroAnual    = Math.round(horasAhorradas * costo);
+      var archivosReduc  = Math.round(archivos * 0.85);
+
+      document.getElementById('res-horas').textContent    = fmtNum(horasAhorradas) + ' h';
+      document.getElementById('res-ahorro').textContent   = '$' + fmtNum(ahorroAnual);
+      document.getElementById('res-archivos').textContent = '-' + archivosReduc;
+    }
+    ['sl-personas','sl-horas','sl-costo','sl-archivos'].forEach(function(id) {
+      document.getElementById(id).addEventListener('input', updateROI);
+    });
+    updateROI();
+
+    // ── SCROLL ANIMATIONS ──────────────────────────
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           entry.target.style.opacity = '1';
           entry.target.style.transform = 'translateY(0)';
@@ -933,12 +1069,113 @@
       });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.card-base, .card-ai').forEach(el => {
+    document.querySelectorAll('.card-base, .card-ai').forEach(function(el) {
       el.style.opacity = '0';
       el.style.transform = 'translateY(20px)';
       el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease';
       observer.observe(el);
     });
+
+    // ── AI CHAT WIDGET ──────────────────────────────
+    var chatOpen = false;
+    var chatHistory = [];
+
+    var SYSTEM_PROMPT = 'Eres el asistente virtual de CONFIA (Consultoria en Finanzas para Empresas de Alto Nivel), la empresa representante oficial de Quantrix en Mexico. Tu funcion es ayudar a posibles clientes a entender los servicios de CONFIA y motivarlos a agendar una consulta gratuita. Servicios: 1) Modelos Financieros con Quantrix, 2) Simulaciones Multivariable, 3) Presupuestos Corporativos, 4) Capacitacion en Quantrix, 5) Revision Inteligente de Informacion con IA, 6) Dashboards Ejecutivos con IA. Quantrix es superior a Excel: reduce formulas hasta 90%, calculos en tiempo real, integracion con SAP y ERP. CONFIA tiene mas de 8 anos de experiencia. Responde en espanol de Mexico, tono profesional y accesible, respuestas cortas (maximo 3 parrafos). Si el usuario muestra interes real, invitalo a contactar a quantrixmexico@gmail.com.';
+
+    function toggleChat() {
+      chatOpen = !chatOpen;
+      var panel     = document.getElementById('chat-panel');
+      var iconOpen  = document.getElementById('chat-icon-open');
+      var iconClose = document.getElementById('chat-icon-close');
+      var notif     = document.getElementById('chat-notif');
+      var btn       = document.getElementById('chat-toggle-btn');
+
+      if (chatOpen) {
+        panel.style.display = 'flex';
+        iconOpen.style.display = 'none';
+        iconClose.style.display = 'block';
+        notif.style.display = 'none';
+        btn.style.boxShadow = '0 4px 12px rgba(245,184,0,0.2)';
+        setTimeout(function() { document.getElementById('chat-input').focus(); }, 100);
+      } else {
+        panel.style.display = 'none';
+        iconOpen.style.display = 'block';
+        iconClose.style.display = 'none';
+        btn.style.boxShadow = '0 8px 24px rgba(245,184,0,0.4)';
+      }
+    }
+
+    function addMessage(role, text) {
+      var container = document.getElementById('chat-messages');
+      var div = document.createElement('div');
+      var isAI = role === 'assistant';
+      div.style.cssText = isAI
+        ? 'background:#1a1a1a;border:1px solid rgba(245,184,0,0.1);border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:0.85rem;color:#ddd;line-height:1.6;max-width:90%;align-self:flex-start;'
+        : 'background:rgba(245,184,0,0.12);border:1px solid rgba(245,184,0,0.2);border-radius:14px 14px 4px 14px;padding:12px 14px;font-size:0.85rem;color:#fff;line-height:1.6;max-width:90%;align-self:flex-end;';
+      div.innerHTML = text.split('\n').join('<br>');
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function addTyping() {
+      var container = document.getElementById('chat-messages');
+      var div = document.createElement('div');
+      div.id = 'typing-indicator';
+      div.style.cssText = 'background:#1a1a1a;border:1px solid rgba(245,184,0,0.1);border-radius:14px 14px 14px 4px;padding:12px 18px;display:flex;gap:5px;align-items:center;align-self:flex-start;';
+      div.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0s infinite;display:inline-block;"></span>'
+                    + '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.2s infinite;display:inline-block;"></span>'
+                    + '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.4s infinite;display:inline-block;"></span>';
+      container.appendChild(div);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function removeTyping() {
+      var el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    }
+
+    function sendMessage() {
+      var input = document.getElementById('chat-input');
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+
+      addMessage('user', text);
+      chatHistory.push({ role: 'user', content: text });
+      addTyping();
+
+      fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: SYSTEM_PROMPT,
+          messages: chatHistory
+        })
+      })
+      .then(function(response) { return response.json(); })
+      .then(function(data) {
+        removeTyping();
+        var reply = (data.content && data.content[0] && data.content[0].text)
+          ? data.content[0].text
+          : 'Lo siento, ocurrio un error. Por favor intenta de nuevo.';
+        addMessage('assistant', reply);
+        chatHistory.push({ role: 'assistant', content: reply });
+      })
+      .catch(function() {
+        removeTyping();
+        addMessage('assistant', 'Error de conexion. Contactanos directamente en quantrixmexico@gmail.com');
+      });
+    }
   </script>
+
+  <style>
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50%       { transform: translateY(-5px); opacity: 1; }
+    }
+  </style>
 </body>
 </html>
+
