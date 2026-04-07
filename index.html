@@ -386,7 +386,23 @@
     <div style="position:absolute; top:30%; left:50%; transform:translateX(-50%); width:600px; height:400px; background:radial-gradient(ellipse, rgba(245,184,0,0.08) 0%, transparent 70%); pointer-events:none;"></div>
 
     <div class="relative z-10 flex flex-col items-center">
-      <img src="images/logo-confia.png" alt="Logo CONFIA" class="w-64 md:w-80 mb-8 animate-fade-in-up" style="filter: drop-shadow(0 0 32px rgba(245,184,0,0.2));">
+      <div class="w-64 md:w-80 mb-8 animate-fade-in-up" style="position:relative;">
+        <video
+          id="hero-video"
+          src="videos/Logo_Animation_With_Arrows_And_Text.mp4"
+          autoplay
+          muted
+          playsinline
+          style="width:100%; filter: drop-shadow(0 0 32px rgba(245,184,0,0.2)); display:block;"
+          onended="this.style.display='none'; document.getElementById('hero-logo-fallback').style.display='block'"
+        ></video>
+        <img
+          id="hero-logo-fallback"
+          src="images/logo-confia.png"
+          alt="Logo CONFIA"
+          style="width:100%; filter: drop-shadow(0 0 32px rgba(245,184,0,0.2)); display:none;"
+        >
+      </div>
       <span class="section-label animate-fade-in-up delay-1">Consultoría Financiera Estratégica</span>
       <h1 class="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-in-up delay-2 leading-tight" style="max-width:900px;">
         Modelos financieros de<br><span class="text-shimmer">próxima generación</span>
@@ -927,11 +943,11 @@
             Contáctanos para una consulta gratuita y descubre cómo Quantrix y la Inteligencia Artificial pueden potenciar tu estrategia financiera.
           </p>
           <div class="space-y-4">
-            <a href="mailto:quantrixmexico@gmail.com" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
+            <a href="/cdn-cgi/l/email-protection#ccbdb9ada2b8bea5b4a1a9b4a5afa38caba1ada5a0e2afa3a1" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
               <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
               <div>
                 <div style="font-size:0.75rem; color:var(--text-muted); font-family:'Syne',sans-serif; text-transform:uppercase; letter-spacing:0.06em;">Email</div>
-                <div style="color:#fff; font-weight:500;">quantrixmexico@gmail.com</div>
+                <div style="color:#fff; font-weight:500;"><span class="__cf_email__" data-cfemail="bacbcfdbd4cec8d3c2d7dfc2d3d9d5faddd7dbd3d694d9d5d7">[email&#160;protected]</span></div>
               </div>
             </a>
           </div>
@@ -993,7 +1009,7 @@
   </footer>
 
   <!-- ── SCRIPTS ────────────────────────────────────── -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     document.addEventListener('DOMContentLoaded', function () {
       // Mobile menu
       const toggle = document.getElementById('menu-toggle');
@@ -1165,16 +1181,4 @@
       })
       .catch(function() {
         removeTyping();
-        addMessage('assistant', 'Error de conexion. Contactanos directamente en quantrixmexico@gmail.com');
-      });
-    }
-  </script>
-
-  <style>
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); opacity: 0.5; }
-      50%       { transform: translateY(-5px); opacity: 1; }
-    }
-  </style>
-</body>
-</html>
+        addMessage('assistant', 'Error de conexion. Contactanos directa
