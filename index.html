@@ -1021,61 +1021,36 @@
     </div>
   </footer>
 
-  <!-- ── WHATSAPP ─────────────────────────────── -->
-  <a href="https://wa.me/523311648352?text=Hola%20CONFIA%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios"
-     target="_blank"
-     title="WhatsApp"
-     style="position:fixed;bottom:24px;right:100px;z-index:1000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,0.4);transition:transform 0.2s;text-decoration:none;"
-     onmouseover="this.style.transform='scale(1.1)'"
-     onmouseout="this.style.transform='scale(1)'">
-    <svg width="28" height="28" viewBox="0 0 32 32" fill="white">
-      <path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.49 2.031 7.796L.057 31.943a.5.5 0 0 0 .614.6l8.278-2.164A15.937 15.937 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.795-1.867l-.486-.29-5.043 1.32 1.243-4.927-.318-.506A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.986c-.398-.199-2.357-1.163-2.72-1.295-.364-.133-.63-.199-.895.199-.266.398-1.03 1.295-1.262 1.561-.232.266-.464.299-.862.1-.398-.2-1.681-.62-3.202-1.977-1.183-1.057-1.981-2.363-2.214-2.761-.232-.398-.025-.613.175-.811.18-.179.398-.465.597-.698.2-.232.266-.398.398-.664.133-.265.067-.497-.033-.696-.1-.2-.895-2.16-1.227-2.957-.322-.776-.65-.671-.895-.683-.232-.01-.497-.013-.763-.013-.265 0-.696.1-1.06.497-.364.398-1.393 1.362-1.393 3.32 0 1.96 1.427 3.852 1.626 4.118.2.265 2.808 4.287 6.802 6.014.951.41 1.692.655 2.27.838.953.303 1.82.26 2.506.158.764-.114 2.357-.964 2.689-1.894.332-.93.332-1.728.232-1.894-.099-.166-.364-.265-.762-.464z"/>
-    </svg>
+  <!-- WhatsApp -->
+  <a href="https://wa.me/523311648352?text=Hola%20CONFIA%2C%20me%20interesa%20conocer%20m%C3%A1s%20sobre%20sus%20servicios" target="_blank" style="position:fixed;bottom:24px;right:100px;z-index:1000;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(37,211,102,0.4);transition:transform 0.2s;text-decoration:none;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="white"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.738 5.49 2.031 7.796L.057 31.943a.5.5 0 0 0 .614.6l8.278-2.164A15.937 15.937 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 0 1-6.795-1.867l-.486-.29-5.043 1.32 1.243-4.927-.318-.506A13.267 13.267 0 0 1 2.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.986c-.398-.199-2.357-1.163-2.72-1.295-.364-.133-.63-.199-.895.199-.266.398-1.03 1.295-1.262 1.561-.232.266-.464.299-.862.1-.398-.2-1.681-.62-3.202-1.977-1.183-1.057-1.981-2.363-2.214-2.761-.232-.398-.025-.613.175-.811.18-.179.398-.465.597-.698.2-.232.266-.398.398-.664.133-.265.067-.497-.033-.696-.1-.2-.895-2.16-1.227-2.957-.322-.776-.65-.671-.895-.683-.232-.01-.497-.013-.763-.013-.265 0-.696.1-1.06.497-.364.398-1.393 1.362-1.393 3.32 0 1.96 1.427 3.852 1.626 4.118.2.265 2.808 4.287 6.802 6.014.951.41 1.692.655 2.27.838.953.303 1.82.26 2.506.158.764-.114 2.357-.964 2.689-1.894.332-.93.332-1.728.232-1.894-.099-.166-.364-.265-.762-.464z"/></svg>
   </a>
 
-  <!-- ── SCRIPTS ───────────────────────────────── -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
 
       // Mobile menu
       var toggle = document.getElementById('menu-toggle');
-      var menu   = document.getElementById('mobile-menu');
+      var menu = document.getElementById('mobile-menu');
       if (toggle && menu) {
-        toggle.addEventListener('click', function() {
-          menu.classList.toggle('hidden');
-          menu.classList.toggle('flex');
-        });
-        menu.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
-            menu.classList.add('hidden');
-            menu.classList.remove('flex');
-          });
-        });
+        toggle.addEventListener('click', function() { menu.classList.toggle('hidden'); menu.classList.toggle('flex'); });
+        menu.querySelectorAll('a').forEach(function(l) { l.addEventListener('click', function() { menu.classList.add('hidden'); menu.classList.remove('flex'); }); });
       }
 
       // Form
       var form = document.getElementById('contact-form');
-      var successMsg = document.getElementById('form-success');
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
-          fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-          }).then(function(r) {
-            if (r.ok) {
-              successMsg.classList.remove('hidden');
-              form.reset();
-              setTimeout(function() { successMsg.classList.add('hidden'); }, 6000);
-            } else {
-              alert('Hubo un error. Por favor intenta de nuevo.');
-            }
+          fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } })
+          .then(function(r) {
+            if (r.ok) { var s = document.getElementById('form-success'); s.classList.remove('hidden'); form.reset(); setTimeout(function(){ s.classList.add('hidden'); }, 6000); }
+            else { alert('Error al enviar. Intenta de nuevo.'); }
           });
         });
       }
 
-      // ROI Calculator
+      // ROI
       function fmtNum(n) { return n.toLocaleString('es-MX'); }
       function updateROI() {
         var p = +document.getElementById('sl-personas').value;
@@ -1083,61 +1058,24 @@
         var c = +document.getElementById('sl-costo').value;
         var a = +document.getElementById('sl-archivos').value;
         document.getElementById('val-personas').textContent = p;
-        document.getElementById('val-horas').textContent    = h + ' h';
-        document.getElementById('val-costo').textContent    = '$' + fmtNum(c);
+        document.getElementById('val-horas').textContent = h + ' h';
+        document.getElementById('val-costo').textContent = '$' + fmtNum(c);
         document.getElementById('val-archivos').textContent = a;
-        document.getElementById('res-horas').textContent    = fmtNum(Math.round(p * h * 0.7 * 12)) + ' h';
-        document.getElementById('res-ahorro').textContent   = '$' + fmtNum(Math.round(p * h * 0.7 * 12 * c));
+        document.getElementById('res-horas').textContent = fmtNum(Math.round(p * h * 0.7 * 12)) + ' h';
+        document.getElementById('res-ahorro').textContent = '$' + fmtNum(Math.round(p * h * 0.7 * 12 * c));
         document.getElementById('res-archivos').textContent = '-' + Math.round(a * 0.85);
       }
-      ['sl-personas','sl-horas','sl-costo','sl-archivos'].forEach(function(id) {
-        var el = document.getElementById(id);
-        if (el) el.addEventListener('input', updateROI);
-      });
+      ['sl-personas','sl-horas','sl-costo','sl-archivos'].forEach(function(id) { var el = document.getElementById(id); if(el) el.addEventListener('input', updateROI); });
       updateROI();
 
-      // Scroll animations
-      var obs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'translateY(0)';
-          }
-        });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.card-base, .card-ai').forEach(function(el) {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, box-shadow 0.3s';
-        obs.observe(el);
-      });
+      // Scroll
+      var obs = new IntersectionObserver(function(entries) { entries.forEach(function(e) { if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } }); }, { threshold: 0.1 });
+      document.querySelectorAll('.card-base,.card-ai').forEach(function(el) { el.style.opacity='0'; el.style.transform='translateY(20px)'; el.style.transition='opacity 0.6s ease,transform 0.6s ease,border-color 0.3s,box-shadow 0.3s'; obs.observe(el); });
 
-      // Chat widget
+      // Chat
       var chatOpen = false;
       var chatHistory = [];
-      var SYS = 'Eres el asistente virtual de CONFIA, representante oficial de Quantrix en Mexico. Ayuda a posibles clientes con sus dudas sobre los servicios: Modelos Financieros, Simulaciones, Presupuestos, Capacitacion en Quantrix, Revision Inteligente con IA, Dashboards con IA. Responde en espanol, maximo 3 parrafos, tono profesional. Si hay interes contactar a quantrixmexico@gmail.com.';
-
-      window.toggleChat = function() {
-        chatOpen = !chatOpen;
-        var panel = document.getElementById('chat-panel');
-        var iOpen = document.getElementById('chat-icon-open');
-        var iClose = document.getElementById('chat-icon-close');
-        var notif = document.getElementById('chat-notif');
-        var btn   = document.getElementById('chat-toggle-btn');
-        if (chatOpen) {
-          panel.style.display = 'flex';
-          iOpen.style.display = 'none';
-          iClose.style.display = 'block';
-          if (notif) notif.style.display = 'none';
-          btn.style.boxShadow = '0 4px 12px rgba(245,184,0,0.2)';
-          setTimeout(function() { var i = document.getElementById('chat-input'); if(i) i.focus(); }, 100);
-        } else {
-          panel.style.display = 'none';
-          iOpen.style.display = 'block';
-          iClose.style.display = 'none';
-          btn.style.boxShadow = '0 8px 24px rgba(245,184,0,0.4)';
-        }
-      };
+      var SYS = 'Eres el asistente virtual de CONFIA, representante oficial de Quantrix en Mexico. Ayuda a posibles clientes con sus dudas. Servicios: Modelos Financieros, Simulaciones, Presupuestos, Capacitacion Quantrix, Revision Inteligente con IA, Dashboards con IA. Responde en espanol, maximo 3 parrafos. Si hay interes: quantrixmexico@gmail.com.';
 
       function addMsg(role, text) {
         var c = document.getElementById('chat-messages');
@@ -1146,47 +1084,58 @@
           ? 'background:#1a1a1a;border:1px solid rgba(245,184,0,0.1);border-radius:14px 14px 14px 4px;padding:12px 14px;font-size:0.85rem;color:#ddd;line-height:1.6;max-width:90%;align-self:flex-start;'
           : 'background:rgba(245,184,0,0.12);border:1px solid rgba(245,184,0,0.2);border-radius:14px 14px 4px 14px;padding:12px 14px;font-size:0.85rem;color:#fff;line-height:1.6;max-width:90%;align-self:flex-end;';
         d.innerHTML = (text || '').split(String.fromCharCode(10)).join('<br>');
-        c.appendChild(d);
-        c.scrollTop = c.scrollHeight;
+        c.appendChild(d); c.scrollTop = c.scrollHeight;
       }
 
       function addTyping() {
         var c = document.getElementById('chat-messages');
-        var d = document.createElement('div');
-        d.id = 'typing-indicator';
+        var d = document.createElement('div'); d.id = 'typing-indicator';
         d.style.cssText = 'background:#1a1a1a;border:1px solid rgba(245,184,0,0.1);border-radius:14px 14px 14px 4px;padding:12px 18px;display:flex;gap:5px;align-items:center;align-self:flex-start;';
-        d.innerHTML = (text || '').split(String.fromCharCode(10)).join('<br>');height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0s infinite;display:inline-block;"></span>'
-                    + '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.2s infinite;display:inline-block;"></span>'
-                    + '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.4s infinite;display:inline-block;"></span>';
-        c.appendChild(d);
-        c.scrollTop = c.scrollHeight;
+        d.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0s infinite;display:inline-block;"></span><span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.2s infinite;display:inline-block;"></span><span style="width:7px;height:7px;border-radius:50%;background:#F5B800;animation:bounce 1s ease-in-out 0.4s infinite;display:inline-block;"></span>';
+        c.appendChild(d); c.scrollTop = c.scrollHeight;
       }
 
-      function removeTyping() {
-        var el = document.getElementById('typing-indicator');
-        if (el) el.remove();
-      }
+      function removeTyping() { var el = document.getElementById('typing-indicator'); if(el) el.remove(); }
+
+      window.toggleChat = function() {
+        chatOpen = !chatOpen;
+        var panel = document.getElementById('chat-panel');
+        var iOpen = document.getElementById('chat-icon-open');
+        var iClose = document.getElementById('chat-icon-close');
+        var notif = document.getElementById('chat-notif');
+        var btn = document.getElementById('chat-toggle-btn');
+        if (chatOpen) {
+          panel.style.display = 'flex'; iOpen.style.display = 'none'; iClose.style.display = 'block';
+          if(notif) notif.style.display = 'none'; btn.style.boxShadow = '0 4px 12px rgba(245,184,0,0.2)';
+          setTimeout(function(){ var i=document.getElementById('chat-input'); if(i) i.focus(); }, 100);
+        } else {
+          panel.style.display = 'none'; iOpen.style.display = 'block'; iClose.style.display = 'none';
+          btn.style.boxShadow = '0 8px 24px rgba(245,184,0,0.4)';
+        }
+      };
 
       window.sendMessage = function() {
         var input = document.getElementById('chat-input');
-        var text = input.value.trim();
-        if (!text) return;
+        var text = input.value.trim(); if(!text) return;
         input.value = '';
-        addMsg('user', text);
-        chatHistory.push({ role: 'user', content: text });
-        addTyping();
+        addMsg('user', text); chatHistory.push({ role: 'user', content: text }); addTyping();
         fetch('https://confia-chat.quantrixmexico.workers.dev/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ model: 'claude-haiku-4-5-20251001', max_tokens: 1000, system: SYS, messages: chatHistory })
         })
         .then(function(r) { return r.json(); })
         .then(function(data) {
           removeTyping();
           var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'Lo siento, ocurrio un error.';
-          addMsg('assistant', reply);
-          chatHistory.push({ role: 'assistant', content: reply });
+          addMsg('assistant', reply); chatHistory.push({ role: 'assistant', content: reply });
         })
-        .catch(function() {
-          removeTyping();
-          addMsg('assistant', 'Error de conexion. Contactanos e
+        .catch(function() { removeTyping(); addMsg('assistant', 'Error de conexion. Contactanos en quantrixmexico@gmail.com'); });
+      };
+
+    });
+  </script>
+  <style>
+    @keyframes bounce { 0%,100%{transform:translateY(0);opacity:0.5;} 50%{transform:translateY(-5px);opacity:1;} }
+  </style>
+</body>
+</html>
