@@ -1003,11 +1003,11 @@
             Contáctanos para una consulta gratuita y descubre cómo Quantrix y la Inteligencia Artificial pueden potenciar tu estrategia financiera.
           </p>
           <div class="space-y-4">
-            <a href="mailto:quantrixmexico@gmail.com" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
+            <a href="mailto:contacto@consultoriaconfia.com" class="flex items-center gap-4 card-base p-4" style="text-decoration:none;">
               <div class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
               <div>
                 <div style="font-size:0.75rem; color:var(--text-muted); font-family:'Syne',sans-serif; text-transform:uppercase; letter-spacing:0.06em;">Email</div>
-                <div style="color:#fff; font-weight:500;">quantrixmexico@gmail.com</div>
+                <div style="color:#fff; font-weight:500;">contacto@consultoriaconfia.com</div>
               </div>
             </a>
           </div>
@@ -1127,7 +1127,7 @@
       // Chat
       var chatOpen = false;
       var chatHistory = [];
-      var SYS = 'Eres el asistente virtual de CONFIA, representante oficial de Quantrix en Mexico. Ayuda a posibles clientes con sus dudas. Servicios: Modelos Financieros, Simulaciones, Presupuestos, Capacitacion Quantrix, Revision Inteligente con IA, Dashboards con IA. Responde en espanol, maximo 3 parrafos. Si hay interes: quantrixmexico@gmail.com.';
+      var SYS = 'Eres el asistente virtual de CONFIA, representante oficial de Quantrix en Mexico. Ayuda a posibles clientes con sus dudas. Servicios: Modelos Financieros, Simulaciones, Presupuestos, Capacitacion Quantrix, Revision Inteligente con IA, Dashboards con IA. Responde en espanol, maximo 3 parrafos. Si hay interes: contacto@consultoriaconfia.com.';
 
       function addMsg(role, text) {
         var c = document.getElementById('chat-messages');
@@ -1181,7 +1181,7 @@
           var reply = (data.content && data.content[0] && data.content[0].text) ? data.content[0].text : 'Lo siento, ocurrio un error.';
           addMsg('assistant', reply); chatHistory.push({ role: 'assistant', content: reply });
         })
-        .catch(function() { removeTyping(); addMsg('assistant', 'Error de conexion. Contactanos en quantrixmexico@gmail.com'); });
+        .catch(function() { removeTyping(); addMsg('assistant', 'Error de conexion. Contactanos en contacto@consultoriaconfia.com'); });
       };
 
     });
